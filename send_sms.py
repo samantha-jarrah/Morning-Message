@@ -1,8 +1,8 @@
 # Download the helper library from https://www.twilio.com/docs/python/install
 import os
 from twilio.rest import Client
-import random
 import requests
+from datetime import datetime
 
 # Weather API
 url = "https://weatherapi-com.p.rapidapi.com/forecast.json"
@@ -10,7 +10,7 @@ url = "https://weatherapi-com.p.rapidapi.com/forecast.json"
 querystring = {"q":"94044", "days":"1"}
 
 headers = {
-	"X-RapidAPI-Key": "4a8352a00dmsh1bf9079140aeeb7p1439c3jsnd4531e0c0efa",
+    "X-RapidAPI-Key": os.environ['WEATHER_API_KEY'],
 	"X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
 }
 
@@ -28,7 +28,7 @@ sunset = response.json()['forecast']['forecastday'][0]['astro']['sunset']
 url = "https://dad-jokes.p.rapidapi.com/random/joke"
 
 headers = {
-	"X-RapidAPI-Key": "4a8352a00dmsh1bf9079140aeeb7p1439c3jsnd4531e0c0efa",
+	"X-RapidAPI-Key": os.environ['JOKE_API_KEY'],
 	"X-RapidAPI-Host": "dad-jokes.p.rapidapi.com"
 }
 
@@ -45,14 +45,15 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 
 # user_name = input("What is your name?: ")
-# test = "Good morning, " + user_name + "!\n\n" + "Here is your joke of the day: " + "FILLER\n\n" + "The weather today is: " + "FILLER\n\n" + "Have a wonderful day." 
-test = "Good morning!\n\n" + "The temperature today for " + city + " is a HIGH of " + str(high_tempF) + " and a LOW of " + str(low_tempF) + ".\nSUNSET is at " + str(sunset) + ".\n\n" + "Joke of the day:\n" + setup + "\n" + punchline + "\n\nHave a wonderful day." 
+text = "Good morning!\n\n" + "The temperature today for " + city + ":\n" + "HIGH of " + str(high_tempF) + "F\n" + "LOW of " + str(low_tempF) + "F\nSUNSET is at " + str(sunset) + "\n\n" + "Joke of the day:\n" + setup + "\n" + punchline + "\n\nHave a wonderful day." 
 message = client.messages \
                 .create(
                      messaging_service_sid='MG5b064236b195a720221403b7913f6be4',
-                     body=test,
+                     body=text,
+                    #  send_at=datetime(2023, 7, 11, 2, 37, 1),
+                    #  schedule_type='fixed',
                      to='+16505156902'
                  )
 
-# print(message.sid)
+print(message.sid)
 
