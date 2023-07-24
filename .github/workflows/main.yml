@@ -25,9 +25,9 @@ jobs:
             if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: execute py script # run file
         env:
-          JOKE_API_KEY: ${{ 'secrets.JOKE_API_KEY' }} # Access secrets
-          WEATHER_API_KEY: ${{ 'secrets.WEATHER_API_KEY' }}
-          TWILIO_ACCOUNT_SID: ${{ 'secrets.TWILIO_ACCOUNT_SID' }}
-          TWILIO_AUTH_TOKEN: ${{ 'secrets.TWILIO_AUTH_TOKEN' }}
+          JOKE_API_KEY: ${{ secrets.JOKE_API_KEY }} # Access secrets
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
         run: |
           python send_sms.py
