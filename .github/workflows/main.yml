@@ -2,7 +2,7 @@ name: py
 
 on:
   schedule:
-    - cron: "0 15 * * *"    #runs at 15:00 UTC everyday
+    - cron: "25 1 * * *"    #runs at 15:00 UTC everyday
 
 jobs:
   build:
