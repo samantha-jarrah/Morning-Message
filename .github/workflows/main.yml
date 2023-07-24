@@ -2,7 +2,7 @@ name: py
 
 on:
   schedule:
-    - cron: "* * * * *"    #runs at 15:00 UTC everyday
+    - cron: "*/2 * * * *"    #runs at 15:00 UTC everyday
   # push:
   #   branches:
   #     - main
